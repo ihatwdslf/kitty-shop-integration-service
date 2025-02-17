@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-statuses
+      author: system
+      changes:
+        - insert:
+            tableName: statuses
+            columns:
+              - column:
+                  name: name
+                  value: "Pending"
+        - insert:
+            tableName: statuses
+            columns:
+              - column:
+                  name: name
+                  value: "Processing"
+        - insert:
+            tableName: statuses
+            columns:
+              - column:
+                  name: name
+                  value: "Shipped"
+        - insert:
+            tableName: statuses
+            columns:
+              - column:
+                  name: name
+                  value: "Delivered"
+        - insert:
+            tableName: statuses
+            columns:
+              - column:
+                  name: name
+                  value: "Cancelled"

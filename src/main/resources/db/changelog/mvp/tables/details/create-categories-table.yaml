@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-categories-table
+      author: system
+      changes:
+        # Categories table
+        - createTable:
+            tableName: categories
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: parent_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: categories
+            baseTableSchemaName: public
+            baseColumnNames: parent_id
+            constraintName: categories_parent_id_fkey
+            referencedTableName: categories
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: SET NULL

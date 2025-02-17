@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/mvp/tables/users/create-user-roles-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/users/create-users-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/reference/create-countries-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/reference/create-payment-methods-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/reference/create-statuses-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/details/create-brands-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/details/create-categories-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/details/create-products-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/details/rel/create-products-categories-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/orders/create-orders-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/orders/create-order-items-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-roles-in-roles-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-countries-in-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-payments-methods-in-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-statuses-in-table.yaml
+  

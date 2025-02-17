@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: system
+      changes:
+        # Users table
+        - createTable:
+            tableName: users
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: phone
+                  type: BIGINT
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+              - column:
+                  name: role_id
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseTableSchemaName: public
+            baseColumnNames: role_id
+            constraintName: role_id_fkey
+            referencedTableName: roles
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: SET NULL

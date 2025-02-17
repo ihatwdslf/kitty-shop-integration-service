@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-order-items-table
+      author: system
+      changes:
+        # Order Items table
+        - createTable:
+            tableName: order_items
+            schemaName: public
+            columns:
+              - column:
+                  name: order_id
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: order_items
+            schemaName: public
+            columnNames: order_id, product_id
+            constraintName: order_items_pkey
+        - addForeignKeyConstraint:
+            baseTableName: order_items
+            baseTableSchemaName: public
+            baseColumnNames: order_id
+            constraintName: order_items_order_id_fkey
+            referencedTableName: orders
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: order_items
+            baseTableSchemaName: public
+            baseColumnNames: product_id
+            constraintName: order_items_product_id_fkey
+            referencedTableName: products
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE

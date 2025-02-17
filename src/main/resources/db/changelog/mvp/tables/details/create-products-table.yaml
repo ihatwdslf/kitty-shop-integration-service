@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-products-table
+      author: system
+      changes:
+        # Products table
+        - createTable:
+            tableName: products
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: price
+                  type: DECIMAL(10,2)
+              - column:
+                  name: stock_quantity
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sku
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: brand_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: products
+            baseTableSchemaName: public
+            baseColumnNames: brand_id
+            constraintName: products_brand_id_fkey
+            referencedTableName: brands
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE

@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-payment-methods
+      author: system
+      changes:
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: name
+                  value: "Credit Card"
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: name
+                  value: "PayPal"
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: name
+                  value: "Bank Transfer"
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: name
+                  value: "Cash on Delivery"

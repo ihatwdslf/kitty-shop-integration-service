@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-products-categories-table
+      author: system
+      changes:
+        # Products_Categories table
+        - createTable:
+            tableName: products_categories
+            schemaName: public
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: products_categories
+            schemaName: public
+            columnNames: product_id, category_id
+            constraintName: products_categories_pkey
+        - addForeignKeyConstraint:
+            baseTableName: products_categories
+            baseTableSchemaName: public
+            baseColumnNames: product_id
+            constraintName: fk_products_categories_product
+            referencedTableName: products
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: products_categories
+            baseTableSchemaName: public
+            baseColumnNames: category_id
+            constraintName: fk_products_categories_category
+            referencedTableName: categories
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE

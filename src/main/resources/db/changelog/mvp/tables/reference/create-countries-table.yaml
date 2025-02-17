@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-countries-table
+      author: system
+      changes:
+        # Countries table
+        - createTable:
+            tableName: countries
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: code
+                  type: VARCHAR(2)
+                  constraints:
+                    nullable: false
+                    unique: true

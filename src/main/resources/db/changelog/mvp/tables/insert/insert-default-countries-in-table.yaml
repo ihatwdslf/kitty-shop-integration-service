@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-countries
+      author: system
+      changes:
+        - insert:
+            tableName: countries
+            columns:
+              - column:
+                  name: name
+                  value: "United States"
+              - column:
+                  name: code
+                  value: "US"
+        - insert:
+            tableName: countries
+            columns:
+              - column:
+                  name: name
+                  value: "Canada"
+              - column:
+                  name: code
+                  value: "CA"
+        - insert:
+            tableName: countries
+            columns:
+              - column:
+                  name: name
+                  value: "United Kingdom"
+              - column:
+                  name: code
+                  value: "GB"
+        - insert:
+            tableName: countries
+            columns:
+              - column:
+                  name: name
+                  value: "Australia"
+              - column:
+                  name: code
+                  value: "AU"

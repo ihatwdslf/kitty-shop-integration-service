@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payment-methods-table
+      author: system
+      changes:
+        # Payment Methods table
+        - createTable:
+            tableName: payment_methods
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-brands-table
+      author: system
+      changes:
+        # Brands table
+        - createTable:
+            tableName: brands
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: country_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: website
+                  type: VARCHAR(255)
+        - addForeignKeyConstraint:
+            baseTableName: brands
+            baseTableSchemaName: public
+            baseColumnNames: country_id
+            constraintName: brands_country_id_fkey
+            referencedTableName: countries
+            referencedTableSchemaName: public
+            referencedColumnNames: id
+            onDelete: CASCADE

@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-statuses-table
+      author: system
+      changes:
+        # Statuses table
+        - createTable:
+            tableName: statuses
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
