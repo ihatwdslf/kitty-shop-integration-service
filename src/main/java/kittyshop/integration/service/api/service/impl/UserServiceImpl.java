@@ -5,6 +5,7 @@ import kittyshop.integration.service.api.dto.UserRegistrationRequestDto;
 import kittyshop.integration.service.api.dto.UserResponseDto;
 import kittyshop.integration.service.api.dto.UserUpdateRequestDto;
 import kittyshop.integration.service.api.entity.user.User;
+import kittyshop.integration.service.api.exception.RegistrationException;
 import kittyshop.integration.service.api.mapper.UserMapper;
 import kittyshop.integration.service.api.repository.UserRepository;
 import kittyshop.integration.service.api.repository.UserRoleRepository;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto) {
         if (userRepository.existsByEmail(requestDto.getEmail())) {
-            throw new RuntimeException(String.format("User with this email '%s' already exists", requestDto.getEmail()));
+            throw new RegistrationException(String.format("User with this email '%s' already exists", requestDto.getEmail()));
         }
 
         User user = userMapper.toUser(requestDto)

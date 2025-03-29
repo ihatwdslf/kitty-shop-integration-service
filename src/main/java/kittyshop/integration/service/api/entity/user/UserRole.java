@@ -21,7 +21,7 @@ public class UserRole implements GrantedAuthority {
     @Column(nullable = false, unique = true)
     private String role;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private final Set<User> users = new HashSet<>();
 
     public String getAuthority() {

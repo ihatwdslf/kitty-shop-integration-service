@@ -33,7 +33,6 @@ public class SecurityConfiguration {
             ControllerRoutes.AUTH_LOGIN,
             ControllerRoutes.AUTH_LOGOUT,
             ControllerRoutes.AUTH_ME,
-            "/**",
             "/v3/api-docs/**",
             "/api-docs/**",
             "/swagger-ui/**",
