@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserRole {
+public class UserRole implements GrantedAuthority {
     @Id
     private Long id;
     
@@ -22,4 +23,8 @@ public class UserRole {
 
     @OneToMany(mappedBy = "role")
     private final Set<User> users = new HashSet<>();
+
+    public String getAuthority() {
+        return role;
+    }
 }
