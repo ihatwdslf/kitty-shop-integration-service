@@ -12,7 +12,6 @@ public abstract class ControllerRoutes {
     public static final String USERS_GET = "/api/v1/users";
     public static final String USERS_GET_ROLES = "/api/v1/users/roles";
 
-    public static final String USER_CREATE = "/api/v1/users";
     public static final String USER_DELETE = "/api/v1/users/{id}";
     public static final String USER_UPDATE = "/api/v1/users/{id}";
 
