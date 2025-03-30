@@ -34,4 +34,11 @@ public abstract class ControllerRoutes {
     public static final String CATEGORY_GET = "/api/v1/categories/{id}";
     public static final String CATEGORY_DELETE = "/api/v1/categories/{id}";
     public static final String CATEGORY_UPDATE = "/api/v1/categories/{id}";
+    
+    // Products related Controllers
+    public static final String PRODUCTS_GET = "/api/v1/products";
+    public static final String PRODUCT_CREATE = "/api/v1/products";
+    public static final String PRODUCT_GET = "/api/v1/products/{id}";
+    public static final String PRODUCT_DELETE = "/api/v1/products/{id}";
+    public static final String PRODUCT_UPDATE = "/api/v1/products/{id}";
 }
