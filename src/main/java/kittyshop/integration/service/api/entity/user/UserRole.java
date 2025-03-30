@@ -1,5 +1,6 @@
 package kittyshop.integration.service.api.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,11 @@ import java.util.Set;
 public class UserRole implements GrantedAuthority {
     @Id
     private Long id;
-    
+
     @Column(nullable = false, unique = true)
     private String role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private final Set<User> users = new HashSet<>();
 

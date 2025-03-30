@@ -1,5 +1,6 @@
 package kittyshop.integration.service.api.config;
 
+import kittyshop.integration.service.api.exception.filter.AuthorizationCheckFilter;
 import kittyshop.integration.service.api.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +43,7 @@ public class SecurityConfiguration {
             "/error"
     );
     private final UserDetailsService userDetailsService;
+    private final AuthorizationCheckFilter authorizationCheckFilter;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
@@ -86,8 +88,8 @@ public class SecurityConfiguration {
                 .httpBasic(withDefaults())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter,
-                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authorizationCheckFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)
                 .build();
     }

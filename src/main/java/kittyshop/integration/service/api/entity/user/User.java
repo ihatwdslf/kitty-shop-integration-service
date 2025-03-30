@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private Long phone;
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private UserRole role;
 

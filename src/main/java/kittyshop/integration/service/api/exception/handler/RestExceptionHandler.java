@@ -12,6 +12,7 @@ import kittyshop.integration.service.api.exception.filter.RequestResponseLogFilt
 import kittyshop.integration.service.api.exception.response.ApiError;
 import kittyshop.integration.service.api.exception.response.ApiErrorCodes;
 import kittyshop.integration.service.api.exception.response.ExceptionResponse;
+import kittyshop.integration.service.api.exception.response.UserAlreadyAuthorizedException;
 import kittyshop.integration.service.api.utils.RequestUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +69,14 @@ public class RestExceptionHandler {
         log.error("RequestId: {}\nValidationException: {}", requestId, ExceptionUtils.getStackTrace(ex));
         String message = ex.getCause() == null ? ex.getMessage() : ex.getCause().getMessage();
         return exceptionResponse.buildResponseEntity(ApiErrorCodes.VALIDATION_ERROR.getErrorCode(), message, ex);
+    }
+
+    @Order(3)
+    @ExceptionHandler({UserAlreadyAuthorizedException.class})
+    public ResponseEntity<ApiError> handleUserAlreadyAuthorizedException(UserAlreadyAuthorizedException ex, HttpServletResponse response) {
+        final String requestId = retrieveRequestHeader(response);
+        log.error("RequestId: {}\nUserAlreadyAuthorizedException -> ", requestId, ex);
+        return exceptionResponse.buildResponseEntity(ApiErrorCodes.VALIDATION_ERROR.getErrorCode(), "Unauthorized user required", ex);
     }
 
     @Order(3)

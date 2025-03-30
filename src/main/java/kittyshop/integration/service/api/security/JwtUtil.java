@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -63,6 +64,19 @@ public class JwtUtil {
                 .parseSignedClaims(token)
                 .getPayload();
         return claimsResolver.apply(claims);
+    }
+
+    public boolean isAlreadyAuthorized(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (AUTH_COOKIE_NAME.equals(cookie.getName())) {
+                    String token = cookie.getValue();
+                    return isValidToken(token);
+                }
+            }
+        }
+        return false;
     }
 
     public Cookie createCookie(String token) {
