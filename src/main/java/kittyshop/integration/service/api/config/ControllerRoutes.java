@@ -15,8 +15,23 @@ public abstract class ControllerRoutes {
     public static final String USER_DELETE = "/api/v1/users/{id}";
     public static final String USER_UPDATE = "/api/v1/users/{id}";
 
+    // Auth related Controllers
     public static final String AUTH_REGISTRATION = "/api/v1/auth/registration";
     public static final String AUTH_LOGIN = "/api/v1/auth/login";
     public static final String AUTH_LOGOUT = "/api/v1/auth/logout";
     public static final String AUTH_ME = "/api/v1/auth/me";
+
+    // Brands related Controllers
+    public static final String BRANDS_GET = "/api/v1/brands";
+    public static final String BRAND_CREATE = "/api/v1/brands";
+    public static final String BRAND_GET = "/api/v1/brands/{id}";
+    public static final String BRAND_DELETE = "/api/v1/brands/{id}";
+    public static final String BRAND_UPDATE = "/api/v1/brands/{id}";
+
+    // Categories related Controllers
+    public static final String CATEGORIES_GET = "/api/v1/categories";
+    public static final String CATEGORY_CREATE = "/api/v1/categories";
+    public static final String CATEGORY_GET = "/api/v1/categories/{id}";
+    public static final String CATEGORY_DELETE = "/api/v1/categories/{id}";
+    public static final String CATEGORY_UPDATE = "/api/v1/categories/{id}";
 }

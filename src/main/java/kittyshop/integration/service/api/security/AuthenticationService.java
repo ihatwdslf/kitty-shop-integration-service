@@ -1,10 +1,10 @@
 package kittyshop.integration.service.api.security;
 
-import kittyshop.integration.service.api.dto.UserLoginRequestDto;
-import kittyshop.integration.service.api.dto.UserLoginResponseDto;
-import kittyshop.integration.service.api.dto.UserResponseDto;
-import kittyshop.integration.service.api.mapper.UserMapperImpl;
-import kittyshop.integration.service.api.service.impl.UserServiceImpl;
+import kittyshop.integration.service.api.logic.user.dto.UserLoginRequestDto;
+import kittyshop.integration.service.api.logic.user.dto.UserLoginResponseDto;
+import kittyshop.integration.service.api.logic.user.dto.UserResponseDto;
+import kittyshop.integration.service.api.logic.user.mapper.impl.UserMapperImpl;
+import kittyshop.integration.service.api.logic.user.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

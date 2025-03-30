@@ -1,6 +1,6 @@
 package kittyshop.integration.service.api.config;
 
-import kittyshop.integration.service.api.exception.filter.AuthorizationCheckFilter;
+import kittyshop.integration.service.api.logic.user.exception.filter.AuthorizationCheckFilter;
 import kittyshop.integration.service.api.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
