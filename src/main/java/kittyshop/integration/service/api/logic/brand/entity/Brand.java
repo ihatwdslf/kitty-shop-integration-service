@@ -7,6 +7,7 @@ import kittyshop.integration.service.api.logic.reference.entity.Country;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Table(name = "brands")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Brand {
     @Id
@@ -32,6 +34,7 @@ public class Brand {
     private Country country;
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "brand")
     private Set<Product> products = new HashSet<>();
 }

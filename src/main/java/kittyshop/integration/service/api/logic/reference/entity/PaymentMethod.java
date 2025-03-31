@@ -1,5 +1,6 @@
 package kittyshop.integration.service.api.logic.reference.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kittyshop.integration.service.api.logic.order.entity.Order;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class PaymentMethod {
     @Column(nullable = false)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "paymentMethod")
     private Set<Order> orders = new HashSet<>();
 }

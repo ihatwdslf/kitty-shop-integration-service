@@ -8,6 +8,7 @@ import kittyshop.integration.service.api.logic.order.entity.OrderItem;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Table(name = "products")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Product {
     @Id
@@ -48,6 +50,7 @@ public class Product {
     private Brand brand;
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             name = "products_categories",
@@ -57,6 +60,7 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
     @JsonIgnore
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private Set<OrderItem> orderItems = new HashSet<>();
 }

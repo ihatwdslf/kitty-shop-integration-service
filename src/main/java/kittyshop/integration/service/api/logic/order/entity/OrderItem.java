@@ -5,11 +5,13 @@ import kittyshop.integration.service.api.logic.product.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "order_items")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class OrderItem {
     @EmbeddedId

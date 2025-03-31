@@ -34,11 +34,25 @@ public abstract class ControllerRoutes {
     public static final String CATEGORY_GET = "/api/v1/categories/{id}";
     public static final String CATEGORY_DELETE = "/api/v1/categories/{id}";
     public static final String CATEGORY_UPDATE = "/api/v1/categories/{id}";
-    
+
     // Products related Controllers
     public static final String PRODUCTS_GET = "/api/v1/products";
     public static final String PRODUCT_CREATE = "/api/v1/products";
     public static final String PRODUCT_GET = "/api/v1/products/{id}";
     public static final String PRODUCT_DELETE = "/api/v1/products/{id}";
     public static final String PRODUCT_UPDATE = "/api/v1/products/{id}";
+
+    // Order related Controllers
+    public static final String ORDERS_GET = "/api/v1/orders";
+    public static final String ORDER_CREATE = "/api/v1/orders";
+    public static final String ORDER_GET = "/api/v1/orders/{id}";
+    public static final String ORDER_DELETE = "/api/v1/orders/{id}";
+    public static final String ORDER_UPDATE = "/api/v1/orders/{id}";
+
+    // Order item related Controllers
+    public static final String ORDER_ITEM_ADD = "/api/v1/orders/{orderId}/items";
+    public static final String ORDER_ITEMS_GET = "/api/v1/orders/{orderId}/items";
+    public static final String ORDER_ITEM_GET = "/api/v1/orders/{orderId}/items/{productId}";
+    public static final String ORDER_ITEM_REMOVE = "/api/v1/orders/{orderId}/items/{productId}";
+    public static final String ORDER_ITEM_UPDATE = "/api/v1/orders/{orderId}/items/{productId}";
 }

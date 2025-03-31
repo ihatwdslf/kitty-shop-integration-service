@@ -7,6 +7,7 @@ import kittyshop.integration.service.api.logic.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Table(name = "orders")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Order {
     @Id

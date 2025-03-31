@@ -8,6 +8,8 @@ import kittyshop.integration.service.api.logic.product.entity.Product;
 public interface ProductMapper {
 
     Product toProduct(ProductCreateRequestDto createRequestDto);
+    
+    Product toProduct(ProductResponseDto responseDto);
 
     ProductResponseDto toProductResponseDto(Product product);
 

@@ -5,6 +5,8 @@ import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,7 +14,9 @@ import java.util.Objects;
 @Embeddable
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
+@Accessors(chain = true)
 public class OrderItemId implements Serializable {
     @Column(name = "order_id")
     private Long orderId;

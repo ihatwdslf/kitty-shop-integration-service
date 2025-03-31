@@ -59,6 +59,37 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
+    public Product toProduct(ProductResponseDto responseDto) {
+        if (responseDto == null) {
+            return null;
+        }
+
+        Product product = new Product();
+        product.setId(responseDto.getId());
+        product.setName(responseDto.getName());
+        product.setDescription(responseDto.getDescription());
+        product.setCreatedAt(responseDto.getCreatedAt());
+        product.setUpdatedAt(responseDto.getCreatedAt());
+        product.setPrice(responseDto.getPrice());
+        product.setSku(responseDto.getStockKeepingUnit());
+        product.setStockQuantity(responseDto.getStockQuantity());
+
+        Brand productBrand = brandService.findById(responseDto.getBrand().getBrandId())
+                .orElseThrow(() -> new EntityNotFoundException("Brand not found by id: " + responseDto.getBrand().getBrandId()));
+        product.setBrand(productBrand);
+
+        Set<Category> categories = responseDto.getCategories().stream()
+                .map(category -> categoryService.findById(category.getCategoryId())
+                        .orElseThrow(() -> new EntityNotFoundException("Category not found by id: " + category.getCategoryId()))
+                )
+                .collect(Collectors.toSet());
+        product.setCategories(categories);
+
+        log.info("Mapped product entity (from response dto): {}", product);
+        return product;
+    }
+
+    @Override
     public ProductResponseDto toProductResponseDto(Product product) {
         if (product == null) {
             return null;

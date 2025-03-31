@@ -1,5 +1,6 @@
 package kittyshop.integration.service.api.logic.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kittyshop.integration.service.api.logic.order.entity.Order;
 import lombok.Getter;
@@ -40,6 +41,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private UserRole role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 

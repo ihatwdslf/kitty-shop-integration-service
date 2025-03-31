@@ -1,5 +1,6 @@
 package kittyshop.integration.service.api.logic.user.mapper;
 
+import kittyshop.integration.service.api.logic.user.dto.UserOnlyFetchResponseDto;
 import kittyshop.integration.service.api.logic.user.dto.UserRegistrationRequestDto;
 import kittyshop.integration.service.api.logic.user.dto.UserResponseDto;
 import kittyshop.integration.service.api.logic.user.dto.UserUpdateRequestDto;
@@ -7,6 +8,8 @@ import kittyshop.integration.service.api.logic.user.entity.User;
 
 public interface UserMapper {
     UserResponseDto toUserResponseDto(User user);
+
+    UserOnlyFetchResponseDto toUserOnlyFetchResponseDto(User user);
 
     User toUser(UserRegistrationRequestDto registrationRequestDto);
 

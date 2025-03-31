@@ -6,6 +6,7 @@ import kittyshop.integration.service.api.logic.product.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Table(name = "categories")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Category {
     @Id
@@ -34,6 +36,7 @@ public class Category {
     private Set<Category> subcategories = new HashSet<>();
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 }

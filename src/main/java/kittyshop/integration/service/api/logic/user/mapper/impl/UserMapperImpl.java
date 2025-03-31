@@ -1,8 +1,6 @@
 package kittyshop.integration.service.api.logic.user.mapper.impl;
 
-import kittyshop.integration.service.api.logic.user.dto.UserRegistrationRequestDto;
-import kittyshop.integration.service.api.logic.user.dto.UserResponseDto;
-import kittyshop.integration.service.api.logic.user.dto.UserUpdateRequestDto;
+import kittyshop.integration.service.api.logic.user.dto.*;
 import kittyshop.integration.service.api.logic.user.entity.User;
 import kittyshop.integration.service.api.logic.user.mapper.UserMapper;
 import org.springframework.stereotype.Component;
@@ -24,6 +22,23 @@ public class UserMapperImpl implements UserMapper {
         userResponseDto.setRole(user.getRole());
         userResponseDto.setPhone(user.getPhone());
         userResponseDto.setAddress(user.getAddress());
+
+        return userResponseDto;
+    }
+
+    @Override
+    public UserOnlyFetchResponseDto toUserOnlyFetchResponseDto(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        UserOnlyFetchResponseDto userResponseDto = new UserOnlyFetchResponseDto();
+        userResponseDto.setId(user.getId());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setRole(new UserRoleOnlyFetchResponseDto()
+                .setId(user.getRole().getId())
+                .setName(user.getRole().getRole())
+        );
 
         return userResponseDto;
     }
