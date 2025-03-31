@@ -5,13 +5,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
-import kittyshop.integration.service.api.logic.user.exception.AuthorizationException;
 import kittyshop.integration.service.api.logic.common.exception.CustomException;
-import kittyshop.integration.service.api.logic.user.exception.RegistrationException;
 import kittyshop.integration.service.api.logic.common.exception.filter.RequestResponseLogFilter;
 import kittyshop.integration.service.api.logic.common.exception.response.ApiError;
 import kittyshop.integration.service.api.logic.common.exception.response.ApiErrorCodes;
 import kittyshop.integration.service.api.logic.common.exception.response.ExceptionResponse;
+import kittyshop.integration.service.api.logic.user.exception.AuthorizationException;
+import kittyshop.integration.service.api.logic.user.exception.CouldNotLoadEntityException;
+import kittyshop.integration.service.api.logic.user.exception.RegistrationException;
 import kittyshop.integration.service.api.logic.user.exception.UserAlreadyAuthorizedException;
 import kittyshop.integration.service.api.utils.RequestUtils;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,15 @@ public class RestExceptionHandler {
     private final RequestUtils requestUtils;
 
     @Order(1)
+    @ExceptionHandler({CouldNotLoadEntityException.class})
+    public ResponseEntity<ApiError> handleCouldNotLoadEntityException(CouldNotLoadEntityException ex, HttpServletRequest request, HttpServletResponse response) {
+        final String requestId = retrieveRequestHeader(response);
+        log.error("RequestId: {}\nURL: {}\nBody: {}\nHandle CouldNotLoadEntityException: details {}, ex -> []",
+                requestId, request.getRequestURI(), requestUtils.extractBody(request), ex.getMessage(), ex);
+        return exceptionResponse.buildResponseEntity(ex.getCode(), ex.getMessage(), ex);
+    }
+
+    @Order(2)
     @ExceptionHandler({CustomException.class})
     public ResponseEntity<ApiError> handleException(CustomException ex, HttpServletRequest request, HttpServletResponse response) {
         final String requestId = retrieveRequestHeader(response);
@@ -168,7 +178,7 @@ public class RestExceptionHandler {
         final String requestId = retrieveRequestHeader(response);
         log.error("RequestId: {}\nURL: {}\nBody: {}, Handle RegistrationException, details {}, ex -> []",
                 requestId, request.getRequestURI(), requestUtils.extractBody(request), ex.getMessage(), ex);
-        return exceptionResponse.buildResponseEntity(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase(), ex);
+        return exceptionResponse.buildResponseEntity(HttpStatus.PAYMENT_REQUIRED.value(), "Entity already exists", ex);
     }
 
     @Order(14)

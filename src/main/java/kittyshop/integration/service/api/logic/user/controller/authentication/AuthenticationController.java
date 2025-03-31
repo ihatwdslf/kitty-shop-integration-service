@@ -32,7 +32,7 @@ public class AuthenticationController extends BaseController {
 
     @PostMapping(ControllerRoutes.AUTH_REGISTRATION)
     public ResponseEntity<Response> registerUser(@RequestBody @Valid UserRegistrationRequestDto requestDto) {
-        return this.response(userService.register(requestDto));
+        return this.response(HttpStatus.CREATED.value(), userService.register(requestDto));
     }
 
     @PostMapping(ControllerRoutes.AUTH_LOGIN)
@@ -47,7 +47,11 @@ public class AuthenticationController extends BaseController {
     }
 
     @PostMapping(ControllerRoutes.AUTH_LOGOUT)
-    public ResponseEntity<Response> logout(HttpServletResponse httpServletResponse) {
+    public ResponseEntity<Response> logout(HttpServletRequest httpServletRequest,
+                                           HttpServletResponse httpServletResponse) {
+        if (!jwtUtil.isAlreadyAuthorized(httpServletRequest)) {
+            return this.response("User is not authorized", HttpStatus.UNAUTHORIZED.value(), null);
+        }
         jwtUtil.clearAuthTokenCookie(httpServletResponse);
         return this.response("Logged out successfully!");
     }

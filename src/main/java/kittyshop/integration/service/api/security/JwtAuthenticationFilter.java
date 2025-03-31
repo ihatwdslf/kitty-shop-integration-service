@@ -1,12 +1,16 @@
 package kittyshop.integration.service.api.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kittyshop.integration.service.api.logic.common.exception.response.ApiError;
+import kittyshop.integration.service.api.logic.user.exception.CouldNotLoadEntityException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +25,9 @@ import java.util.Arrays;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
     private final JwtUtil jwtUtil;
+    private final ObjectMapper objectMapper;
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -48,6 +54,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             filterChain.doFilter(request, response);
+        } catch (CouldNotLoadEntityException ex) {
+            logger.error(ex.getMessage());
+            logger.error(ex.getDetails());
+            response.setStatus(HttpStatus.OK.value());
+            response.getWriter().write(
+                    objectMapper.writeValueAsString(
+                            new ApiError(ex.getCode(), ex.getMessage(), ex.getDetails(), ex.getTrySolution())
+                    )
+            );
+            response.getWriter().flush();
         } catch (JwtException ex) {
             logger.error("Invalid JWT token: " + ex.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
