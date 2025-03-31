@@ -32,6 +32,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         try {
             String token = getToken(request);
+
+            if (token != null && !jwtUtil.isValidToken(token)) {
+                logger.error("Invalid JWT token found: " + token);
+                jwtUtil.clearAuthTokenCookie(response);
+            }
+
             if (token != null && jwtUtil.isValidToken(token)) {
                 // NOTE: Temporary to startup frontend
                 String email = jwtUtil.getEmail(token);
@@ -40,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
+
             filterChain.doFilter(request, response);
         } catch (JwtException ex) {
             logger.error("Invalid JWT token: " + ex.getMessage());

@@ -9,7 +9,7 @@ import java.util.List;
 public class PageableUtils {
 
     public static final List<Sort.Order> USERS_ORDER_LIST = List.of(new Sort.Order(Sort.Direction.ASC, "email"));
-
+    
     public static Pageable generatePageable(Integer page, Integer size, Sort.Direction sortDirection,
                                             String sortByField, String defaultSortBy) {
         String field = sortByField != null ? sortByField : defaultSortBy;

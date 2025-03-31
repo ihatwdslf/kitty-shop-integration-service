@@ -89,6 +89,17 @@ public class JwtUtil {
         return cookie;
     }
 
+    public String getAuthorizedUserEmailFromJwt(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) return null;
+        for (Cookie cookie : cookies) {
+            if (AUTH_COOKIE_NAME.equals(cookie.getName())) {
+                return isValidToken(cookie.getValue()) ? getEmail(cookie.getValue()) : null;
+            }
+        }
+        return null;
+    }
+
     public void clearAuthTokenCookie(HttpServletResponse response) {
         Cookie cookie = new Cookie(AUTH_COOKIE_NAME, "");
         cookie.setHttpOnly(true);
