@@ -4,12 +4,15 @@ import jakarta.validation.Valid;
 import kittyshop.integration.service.api.config.ControllerRoutes;
 import kittyshop.integration.service.api.logic.common.controller.BaseController;
 import kittyshop.integration.service.api.logic.common.dto.Response;
+import kittyshop.integration.service.api.logic.common.exception.EntityNotFoundException;
 import kittyshop.integration.service.api.logic.user.dto.UserUpdateRequestDto;
 import kittyshop.integration.service.api.logic.user.entity.User;
 import kittyshop.integration.service.api.logic.user.mapper.UserMapper;
 import kittyshop.integration.service.api.logic.user.service.UserService;
 import kittyshop.integration.service.api.utils.PageableUtils;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ import static kittyshop.integration.service.api.utils.PageableUtils.USERS_ORDER_
 @RequiredArgsConstructor
 public class UserController extends BaseController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final UserMapper userMapper;
 
@@ -47,7 +51,12 @@ public class UserController extends BaseController {
     }
 
     @DeleteMapping(ControllerRoutes.USER_DELETE)
-    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
+    public ResponseEntity<Response> deleteById(@PathVariable("id") Long id) {
+        log.info("Delete user with id: {}", id);
+        boolean isExistsById = userService.existsById(id);
+        if (!isExistsById) {
+            throw new EntityNotFoundException(String.format("User is not exists by id '%d'", id));
+        }
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

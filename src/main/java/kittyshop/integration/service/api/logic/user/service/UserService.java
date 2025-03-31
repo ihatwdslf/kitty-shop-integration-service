@@ -18,6 +18,8 @@ public interface UserService {
 
     Optional<User> findByEmail(String email);
 
+    boolean existsById(Long id);
+    
     void deleteById(Long id);
 
     UserResponseDto updateById(Long id, UserUpdateRequestDto requestDto);

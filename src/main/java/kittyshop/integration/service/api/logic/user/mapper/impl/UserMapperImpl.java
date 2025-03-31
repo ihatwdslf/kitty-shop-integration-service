@@ -72,7 +72,21 @@ public class UserMapperImpl implements UserMapper {
         if (userUpdateRequestDto == null || user == null) {
             return;
         }
-        user.setFirstName(userUpdateRequestDto.getFirstName());
-        user.setLastName(userUpdateRequestDto.getLastName());
+
+        if (userUpdateRequestDto.getFirstName() != null) {
+            user.setFirstName(userUpdateRequestDto.getFirstName());
+        }
+
+        if (userUpdateRequestDto.getLastName() != null) {
+            user.setLastName(userUpdateRequestDto.getLastName());
+        }
+
+        if (userUpdateRequestDto.getPhone() != null) {
+            user.setPhone(userUpdateRequestDto.getPhone());
+        }
+
+        if (userUpdateRequestDto.getAddress() != null) {
+            user.setAddress(userUpdateRequestDto.getAddress());
+        }
     }
 }

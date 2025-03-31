@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
+    public boolean existsById(Long id) {
+        return userRepository.existsById(id);
     }
 
     @Override
@@ -72,5 +72,10 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUser(requestDto, user);
         userRepository.save(user);
         return userMapper.toUserResponseDto(user);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

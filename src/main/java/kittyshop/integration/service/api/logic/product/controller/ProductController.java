@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController extends BaseController {
 
-    private final ProductMapper productMapper;
     private final ProductService productService;
 
     @GetMapping(ControllerRoutes.PRODUCTS_GET)
@@ -47,7 +47,7 @@ public class ProductController extends BaseController {
     @PostMapping(ControllerRoutes.PRODUCT_CREATE)
     public ResponseEntity<Response> createProduct(@Valid @RequestBody ProductCreateRequestDto createProductDto) {
         log.info("Create product with data: {}", createProductDto);
-        return this.response(productService.create(createProductDto));
+        return this.response(HttpStatus.CREATED.value(), productService.create(createProductDto));
     }
 
     @PatchMapping(ControllerRoutes.PRODUCT_UPDATE)

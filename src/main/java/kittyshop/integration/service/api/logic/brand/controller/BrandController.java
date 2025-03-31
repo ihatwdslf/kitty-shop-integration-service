@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,7 @@ public class BrandController extends BaseController {
     @PostMapping(ControllerRoutes.BRAND_CREATE)
     public ResponseEntity<Response> createBrand(@Valid @RequestBody BrandCreateRequestDto createBrandDto) {
         log.info("Create brand with data: {}", createBrandDto);
-        return this.response(brandService.create(createBrandDto));
+        return this.response(HttpStatus.CREATED.value(), brandService.create(createBrandDto));
     }
 
     @PatchMapping(ControllerRoutes.BRAND_UPDATE)

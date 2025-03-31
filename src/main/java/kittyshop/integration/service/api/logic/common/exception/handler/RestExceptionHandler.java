@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import kittyshop.integration.service.api.logic.common.exception.CustomException;
+import kittyshop.integration.service.api.logic.common.exception.EntityNotFoundException;
 import kittyshop.integration.service.api.logic.common.exception.filter.RequestResponseLogFilter;
 import kittyshop.integration.service.api.logic.common.exception.response.ApiError;
 import kittyshop.integration.service.api.logic.common.exception.response.ApiErrorCodes;
@@ -56,6 +57,15 @@ public class RestExceptionHandler {
     }
 
     @Order(2)
+    @ExceptionHandler({EntityNotFoundException.class})
+    public ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException ex, HttpServletRequest request, HttpServletResponse response) {
+        final String requestId = retrieveRequestHeader(response);
+        log.error("RequestId: {}\nURL: {}\nBody: {}\nHandle EntityNotFoundException: details {}, ex -> []",
+                requestId, request.getRequestURI(), requestUtils.extractBody(request), ex.getMessage(), ex);
+        return exceptionResponse.buildResponseEntity(ApiErrorCodes.NOT_FOUND.getErrorCode(), "Entity not found", ex);
+    }
+
+    @Order(3)
     @ExceptionHandler({CustomException.class})
     public ResponseEntity<ApiError> handleException(CustomException ex, HttpServletRequest request, HttpServletResponse response) {
         final String requestId = retrieveRequestHeader(response);

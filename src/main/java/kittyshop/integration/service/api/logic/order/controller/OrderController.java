@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,7 @@ public class OrderController extends BaseController {
                                                 HttpServletRequest httpServletRequest) {
         String authorizedUserEmail = jwtUtil.getAuthorizedUserEmailFromJwt(httpServletRequest);
         log.info("Create order with user email '{}' and data: {}", authorizedUserEmail, createRequestDto);
-        return this.response(orderService.create(authorizedUserEmail, createRequestDto));
+        return this.response(HttpStatus.CREATED.value(), orderService.create(authorizedUserEmail, createRequestDto));
     }
 
     @PatchMapping(ControllerRoutes.ORDER_UPDATE)
