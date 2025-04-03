@@ -7,5 +7,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CategoryIdentifierAndNameResponseDto {
     private Long categoryId;
+    private String categoryKey;
     private String categoryName;
 }

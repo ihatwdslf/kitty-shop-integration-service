@@ -6,6 +6,6 @@ import java.util.Set;
 
 @Data
 public class ProductRequestDto {
-    private Set<Long> categoryIds;
+    private Set<String> categoryKeys;
     private Long brandId;
 }

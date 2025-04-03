@@ -18,6 +18,8 @@ public interface CategoryService extends SortableService {
 
     Optional<Category> findById(Long id);
     
+    Optional<Category> findByKey(String key);
+    
     ListResponseDto<CategoryResponseDto> findAllByParentId(Long parentId);
 
     void deleteById(Long id);

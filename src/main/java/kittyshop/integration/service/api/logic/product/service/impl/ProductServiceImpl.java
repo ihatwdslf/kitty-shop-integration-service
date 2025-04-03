@@ -45,10 +45,10 @@ public class ProductServiceImpl implements ProductService {
     public ListResponseDto<ProductResponseDto> findAll(ProductRequestDto requestDto, Pageable pageable) {
         Specification<Product> spec = Specification.where(null);
 
-        if (requestDto.getCategoryIds() != null && !requestDto.getCategoryIds().isEmpty()) {
+        if (requestDto.getCategoryKeys() != null && !requestDto.getCategoryKeys().isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) -> {
                 Join<Product, Category> categoryJoin = root.join("categories");
-                return categoryJoin.get("id").in(requestDto.getCategoryIds());
+                return categoryJoin.get("key").in(requestDto.getCategoryKeys());
             });
         }
 

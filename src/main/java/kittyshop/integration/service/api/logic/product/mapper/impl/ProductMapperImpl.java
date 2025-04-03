@@ -47,9 +47,9 @@ public class ProductMapperImpl implements ProductMapper {
                 .orElseThrow(() -> new EntityNotFoundException("Brand not found by id: " + createRequestDto.getBrandId()));
         product.setBrand(productBrand);
 
-        Set<Category> categories = createRequestDto.getCategoryIds().stream()
-                .map(categoryId -> categoryService.findById(categoryId)
-                        .orElseThrow(() -> new EntityNotFoundException("Category not found by id: " + categoryId))
+        Set<Category> categories = createRequestDto.getCategoryKeys().stream()
+                .map(categoryKey -> categoryService.findByKey(categoryKey)
+                        .orElseThrow(() -> new EntityNotFoundException("Category not found by key: " + categoryKey))
                 )
                 .collect(Collectors.toSet());
         product.setCategories(categories);
@@ -108,6 +108,7 @@ public class ProductMapperImpl implements ProductMapper {
         List<CategoryIdentifierAndNameResponseDto> categories = product.getCategories().stream()
                 .map(category -> new CategoryIdentifierAndNameResponseDto()
                         .setCategoryId(category.getId())
+                        .setCategoryKey(category.getKey())
                         .setCategoryName(category.getName()))
                 .toList();
         productResponseDto.setCategories(categories);
@@ -155,10 +156,10 @@ public class ProductMapperImpl implements ProductMapper {
             product.setSku(updateRequestDto.getStockKeepingUnit());
         }
 
-        if (updateRequestDto.getCategoryIds() != null) {
-            Set<Category> categories = updateRequestDto.getCategoryIds().stream()
-                    .map(categoryId -> categoryService.findById(categoryId)
-                            .orElseThrow(() -> new EntityNotFoundException("Category not found by id: " + categoryId))
+        if (updateRequestDto.getCategoryKeys() != null) {
+            Set<Category> categories = updateRequestDto.getCategoryKeys().stream()
+                    .map(categoryKey -> categoryService.findByKey(categoryKey)
+                            .orElseThrow(() -> new EntityNotFoundException("Category not found by key: " + categoryKey))
                     )
                     .collect(Collectors.toSet());
             product.setCategories(categories);

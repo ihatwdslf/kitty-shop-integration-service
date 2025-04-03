@@ -9,6 +9,9 @@ import lombok.Data;
 public class CategoryUpdateRequestDto {
 
     @Size(min = 3, max = 64)
+    private String key;
+
+    @Size(min = 3, max = 64)
     private String name;
 
     @Size(min = 12, max = 255)
@@ -17,6 +20,8 @@ public class CategoryUpdateRequestDto {
     private String icon;
     
     private Long parentId;
+    
+    private Boolean isQuicklyAccessible;
     
     private Boolean isRemovable;
 }

@@ -15,5 +15,5 @@ public class ProductCreateRequestDto {
     private String stockKeepingUnit;
     private LocalDateTime createdAt;
     private Long brandId;
-    private Set<Long> categoryIds;
+    private Set<String> categoryKeys;
 }

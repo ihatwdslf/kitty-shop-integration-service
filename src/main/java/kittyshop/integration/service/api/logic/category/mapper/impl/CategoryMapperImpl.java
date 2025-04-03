@@ -25,12 +25,18 @@ public class CategoryMapperImpl implements CategoryMapper {
         }
 
         Category category = new Category();
+        category.setKey(createRequestDto.getKey());
         category.setName(createRequestDto.getName());
         category.setDescription(createRequestDto.getDescription());
 
         category.setIsRemovable(createRequestDto.getIsRemovable() != null
                 ? createRequestDto.getIsRemovable()
                 : true
+        );
+
+        category.setIsQuicklyAccessible(createRequestDto.getIsQuicklyAccessible() != null
+                ? createRequestDto.getIsQuicklyAccessible()
+                : false
         );
 
         if (createRequestDto.getIcon() != null) {
@@ -55,10 +61,12 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
         categoryResponseDto.setId(category.getId());
+        categoryResponseDto.setKey(category.getKey());
         categoryResponseDto.setName(category.getName());
         categoryResponseDto.setDescription(category.getDescription());
         categoryResponseDto.setIcon(category.getIcon());
         categoryResponseDto.setIsRemovable(category.getIsRemovable());
+        categoryResponseDto.setIsQuicklyAccessible(category.getIsQuicklyAccessible());
 
         if (category.getParent() != null) {
             categoryResponseDto.setParentId(category.getParent().getId());
@@ -72,6 +80,10 @@ public class CategoryMapperImpl implements CategoryMapper {
     public void updateCategory(CategoryUpdateRequestDto updateRequestDto, Category category) {
         if (updateRequestDto == null || category == null) {
             return;
+        }
+        
+        if (updateRequestDto.getKey() != null) {
+            category.setKey(updateRequestDto.getKey());
         }
 
         if (updateRequestDto.getName() != null) {
@@ -88,6 +100,10 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         if (updateRequestDto.getIsRemovable() != null) {
             category.setIsRemovable(updateRequestDto.getIsRemovable());
+        }
+        
+        if (updateRequestDto.getIsQuicklyAccessible() != null) {
+            category.setIsQuicklyAccessible(updateRequestDto.getIsQuicklyAccessible());
         }
 
         if (updateRequestDto.getParentId() != null) {

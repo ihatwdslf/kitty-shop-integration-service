@@ -29,4 +29,6 @@ databaseChangeLog:
       file: db/changelog/mvp/tables/insert/insert-default-payments-methods-in-table.yaml
   - include:
       file: db/changelog/mvp/tables/insert/insert-default-statuses-in-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-categories-in-table.yaml
   

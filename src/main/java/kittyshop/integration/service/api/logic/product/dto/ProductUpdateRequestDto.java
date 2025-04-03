@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Data
 public class ProductUpdateRequestDto {
+    private String key;
     private String name;
     private String description;
     private BigDecimal price;
@@ -16,5 +17,5 @@ public class ProductUpdateRequestDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Long brandId;
-    private Set<Long> categoryIds;
+    private Set<String> categoryKeys;
 }

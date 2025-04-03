@@ -25,6 +25,9 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String key;
+
     private String description;
     
     private String icon;
@@ -33,6 +36,9 @@ public class Category {
     @JoinColumn(name = "parent_id")
     private Category parent;
 
+    @Column(name = "is_quickly_accessible", nullable = false)
+    private Boolean isQuicklyAccessible;
+    
     @Column(name = "is_removable", nullable = false)
     private Boolean isRemovable;
     

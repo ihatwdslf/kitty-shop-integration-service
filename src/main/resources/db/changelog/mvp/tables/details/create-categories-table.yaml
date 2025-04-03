@@ -20,6 +20,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: key
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
                   name: description
                   type: TEXT
               - column:
@@ -30,6 +35,12 @@ databaseChangeLog:
               - column:
                   name: parent_id
                   type: BIGINT
+              - column:
+                  name: is_quickly_accessible
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+                  defaultValue: "false"
               - column:
                   name: is_removable
                   type: BOOLEAN

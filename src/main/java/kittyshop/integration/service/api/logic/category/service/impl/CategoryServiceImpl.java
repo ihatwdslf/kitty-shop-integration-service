@@ -54,6 +54,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Optional<Category> findByKey(String key) {
+        return categoryRepository.findByKey(key);
+    }
+
+    @Override
     public ListResponseDto<CategoryResponseDto> findAllByParentId(Long parentId) {
         List<Category> categoriesList = categoryRepository.findByParentId(parentId);
         return new ListResponseDto<CategoryResponseDto>()

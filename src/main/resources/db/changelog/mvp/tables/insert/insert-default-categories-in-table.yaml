@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-categories
+      author: system
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Чоловіче"
+              - column:
+                  name: key
+                  value: "mens"
+              - column:
+                  name: description
+                  value: "Стильний чоловічий одяг та аксесуари для будь-якої нагоди. Від класичних костюмів до повсякденних футболок — знайдіть свій ідеальний образ!"
+              - column:
+                  name: is_quickly_accessible
+                  value: "true"
+              - column:
+                  name: is_removable
+                  value: "false"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Жіноче"
+              - column:
+                  name: key
+                  value: "womens"
+              - column:
+                  name: description
+                  value: "Жіноча мода, що підкреслює вашу красу. Від елегантних суконь до сучасних трендів — створіть свій унікальний стиль!"
+              - column:
+                  name: is_quickly_accessible
+                  value: "true"
+              - column:
+                  name: is_removable
+                  value: "false"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Аксесуари"
+              - column:
+                  name: key
+                  value: "accessories"
+              - column:
+                  name: description
+                  value: "Завершіть свій образ стильними аксесуарами. Сумки, прикраси та головні убори — все для вашого самовираження!"
+              - column:
+                  name: is_quickly_accessible
+                  value: "true"
+              - column:
+                  name: is_removable
+                  value: "false"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Косметика"
+              - column:
+                  name: key
+                  value: "cosmetics"
+              - column:
+                  name: description
+                  value: "Косметика для підкреслення вашої природної краси. Від основи до фінішу — обирайте якісні продукти для ідеального макіяжу!"
+              - column:
+                  name: is_quickly_accessible
+                  value: "true"
+              - column:
+                  name: is_removable
+                  value: "false"
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: "Парфуми"
+              - column:
+                  name: key
+                  value: "fragrances"
+              - column:
+                  name: description
+                  value: "Знайдіть свій унікальний аромат серед нашої колекції парфумів. Від свіжих до глибоких нот — аромати для кожного настрою!"
+              - column:
+                  name: is_quickly_accessible
+                  value: "true"
+              - column:
+                  name: is_removable
+                  value: "false"
