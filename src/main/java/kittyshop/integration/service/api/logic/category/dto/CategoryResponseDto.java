@@ -9,5 +9,7 @@ public class CategoryResponseDto {
     private Long id;
     private String name;
     private String description;
+    private String icon;
     private Long parentId;
+    private Boolean isRemovable;
 }

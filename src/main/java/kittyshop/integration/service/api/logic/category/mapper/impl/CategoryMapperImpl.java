@@ -28,6 +28,15 @@ public class CategoryMapperImpl implements CategoryMapper {
         category.setName(createRequestDto.getName());
         category.setDescription(createRequestDto.getDescription());
 
+        category.setIsRemovable(createRequestDto.getIsRemovable() != null
+                ? createRequestDto.getIsRemovable()
+                : true
+        );
+
+        if (createRequestDto.getIcon() != null) {
+            category.setIcon(createRequestDto.getIcon());
+        }
+
         if (createRequestDto.getParentId() != null) {
             Category parentCategory = categoryService.findById(createRequestDto.getParentId())
                     .orElseThrow(() -> new EntityNotFoundException("Parent category not found by id: " + createRequestDto.getParentId()));
@@ -48,6 +57,8 @@ public class CategoryMapperImpl implements CategoryMapper {
         categoryResponseDto.setId(category.getId());
         categoryResponseDto.setName(category.getName());
         categoryResponseDto.setDescription(category.getDescription());
+        categoryResponseDto.setIcon(category.getIcon());
+        categoryResponseDto.setIsRemovable(category.getIsRemovable());
 
         if (category.getParent() != null) {
             categoryResponseDto.setParentId(category.getParent().getId());
@@ -69,6 +80,14 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         if (updateRequestDto.getDescription() != null) {
             category.setDescription(updateRequestDto.getDescription());
+        }
+
+        if (updateRequestDto.getIcon() != null) {
+            category.setIcon(updateRequestDto.getIcon());
+        }
+
+        if (updateRequestDto.getIsRemovable() != null) {
+            category.setIsRemovable(updateRequestDto.getIsRemovable());
         }
 
         if (updateRequestDto.getParentId() != null) {

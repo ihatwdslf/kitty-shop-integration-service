@@ -34,6 +34,7 @@ public abstract class ControllerRoutes {
     public static final String CATEGORY_GET = "/api/v1/categories/{id}";
     public static final String CATEGORY_DELETE = "/api/v1/categories/{id}";
     public static final String CATEGORY_UPDATE = "/api/v1/categories/{id}";
+    public static final String CATEGORY_NESTED_GET ="/api/v1/categories/{id}/nested";
 
     // Products related Controllers
     public static final String PRODUCTS_GET = "/api/v1/products";

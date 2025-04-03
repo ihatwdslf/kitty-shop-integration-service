@@ -10,6 +10,6 @@ public class UserResponseDto {
     private String firstName;
     private String lastName;
     private UserRole role;
-    private Long phone;
+    private String phone;
     private String address;
 }

@@ -23,8 +23,19 @@ databaseChangeLog:
                   name: description
                   type: TEXT
               - column:
+                  name: icon
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: true    
+              - column:
                   name: parent_id
                   type: BIGINT
+              - column:
+                  name: is_removable
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+                  defaultValue: "true"
         - addForeignKeyConstraint:
             baseTableName: categories
             baseTableSchemaName: public

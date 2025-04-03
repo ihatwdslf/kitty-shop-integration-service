@@ -43,6 +43,12 @@ public class CategoryController extends BaseController {
         return categoryOptional.map(category -> this.response(categoryMapper.toCategoryResponseDto(category)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    
+    @GetMapping(ControllerRoutes.CATEGORY_NESTED_GET)
+    public ResponseEntity<Response> getCategoryNestedById(@PathVariable Long id) {
+        log.info("Find category nested by id: {}", id);
+        return this.response(categoryService.findAllByParentId(id));
+    }
 
     @PostMapping(ControllerRoutes.CATEGORY_CREATE)
     public ResponseEntity<Response> createCategory(@Valid @RequestBody CategoryCreateRequestDto createCategoryDto) {

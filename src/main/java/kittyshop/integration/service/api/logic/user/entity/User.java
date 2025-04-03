@@ -34,7 +34,7 @@ public class User implements UserDetails {
 
     private String firstName;
     private String lastName;
-    private Long phone;
+    private String phone;
     private String address;
 
     @ManyToOne(fetch = FetchType.EAGER)

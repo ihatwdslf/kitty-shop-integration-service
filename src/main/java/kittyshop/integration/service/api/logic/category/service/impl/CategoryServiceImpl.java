@@ -54,6 +54,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public ListResponseDto<CategoryResponseDto> findAllByParentId(Long parentId) {
+        List<Category> categoriesList = categoryRepository.findByParentId(parentId);
+        return new ListResponseDto<CategoryResponseDto>()
+                .setList(categoriesList.stream()
+                        .map(categoryMapper::toCategoryResponseDto)
+                        .toList())
+                .setTotalRows((long) categoriesList.size());
+    }
+
+    @Override
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
     }

@@ -26,11 +26,16 @@ public class Category {
     private String name;
 
     private String description;
+    
+    private String icon;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
 
+    @Column(name = "is_removable", nullable = false)
+    private Boolean isRemovable;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Category> subcategories = new HashSet<>();

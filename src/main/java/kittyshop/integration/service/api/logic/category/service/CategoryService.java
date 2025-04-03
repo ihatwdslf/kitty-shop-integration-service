@@ -17,6 +17,8 @@ public interface CategoryService extends SortableService {
     ListResponseDto<CategoryResponseDto> findAll(Pageable pageable);
 
     Optional<Category> findById(Long id);
+    
+    ListResponseDto<CategoryResponseDto> findAllByParentId(Long parentId);
 
     void deleteById(Long id);
 

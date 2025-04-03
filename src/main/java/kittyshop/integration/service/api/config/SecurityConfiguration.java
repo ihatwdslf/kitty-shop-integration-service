@@ -34,6 +34,17 @@ public class SecurityConfiguration {
             ControllerRoutes.AUTH_LOGIN,
             ControllerRoutes.AUTH_LOGOUT,
             ControllerRoutes.AUTH_ME,
+            ControllerRoutes.CATEGORIES_GET,
+            ControllerRoutes.CATEGORY_GET,
+            ControllerRoutes.CATEGORY_NESTED_GET,
+            ControllerRoutes.BRANDS_GET,
+            ControllerRoutes.BRAND_GET,
+            ControllerRoutes.PRODUCTS_GET,
+            ControllerRoutes.PRODUCT_GET,
+            ControllerRoutes.ORDER_GET,
+            ControllerRoutes.ORDERS_GET,
+            ControllerRoutes.ORDER_ITEM_GET,
+            ControllerRoutes.ORDER_ITEMS_GET,
             "/v3/api-docs/**",
             "/api-docs/**",
             "/swagger-ui/**",
@@ -55,7 +66,7 @@ public class SecurityConfiguration {
     public CorsConfiguration corsConfiguration() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         return config;
