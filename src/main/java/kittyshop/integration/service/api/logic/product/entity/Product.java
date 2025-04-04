@@ -32,6 +32,11 @@ public class Product {
     private String description;
 
     private BigDecimal price;
+    
+    private Integer discount;
+    
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @Column(nullable = false)
     private Integer stockQuantity;

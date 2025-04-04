@@ -40,8 +40,11 @@ public class ProductMapperImpl implements ProductMapper {
         product.setCreatedAt(createRequestDto.getCreatedAt());
         product.setUpdatedAt(createRequestDto.getCreatedAt());
         product.setPrice(createRequestDto.getPrice());
+        product.setImageUrl(createRequestDto.getImageUrl());
         product.setSku(createRequestDto.getStockKeepingUnit());
         product.setStockQuantity(createRequestDto.getStockQuantity());
+        
+        product.setDiscount(createRequestDto.getDiscount() != null ? createRequestDto.getDiscount() : 0);
 
         Brand productBrand = brandService.findById(createRequestDto.getBrandId())
                 .orElseThrow(() -> new EntityNotFoundException("Brand not found by id: " + createRequestDto.getBrandId()));
@@ -71,6 +74,8 @@ public class ProductMapperImpl implements ProductMapper {
         product.setCreatedAt(responseDto.getCreatedAt());
         product.setUpdatedAt(responseDto.getCreatedAt());
         product.setPrice(responseDto.getPrice());
+        product.setDiscount(responseDto.getDiscount());
+        product.setImageUrl(responseDto.getImageUrl());
         product.setSku(responseDto.getStockKeepingUnit());
         product.setStockQuantity(responseDto.getStockQuantity());
 
@@ -102,6 +107,8 @@ public class ProductMapperImpl implements ProductMapper {
         productResponseDto.setCreatedAt(product.getCreatedAt());
         productResponseDto.setUpdatedAt(product.getUpdatedAt());
         productResponseDto.setPrice(product.getPrice());
+        productResponseDto.setDiscount(product.getDiscount());
+        productResponseDto.setImageUrl(product.getImageUrl());
         productResponseDto.setStockQuantity(product.getStockQuantity());
         productResponseDto.setStockKeepingUnit(product.getSku());
 
@@ -146,6 +153,14 @@ public class ProductMapperImpl implements ProductMapper {
 
         if (updateRequestDto.getPrice() != null) {
             product.setPrice(updateRequestDto.getPrice());
+        }
+        
+        if (updateRequestDto.getDiscount() != null) {
+            product.setDiscount(updateRequestDto.getDiscount());
+        }
+        
+        if (updateRequestDto.getImageUrl() != null) {
+            product.setImageUrl(updateRequestDto.getImageUrl());
         }
 
         if (updateRequestDto.getStockQuantity() != null) {

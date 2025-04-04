@@ -26,6 +26,14 @@ databaseChangeLog:
                   name: price
                   type: DECIMAL(10,2)
               - column:
+                  name: discount
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: VARCHAR(255)
+              - column:
                   name: stock_quantity
                   type: INTEGER
                   constraints:

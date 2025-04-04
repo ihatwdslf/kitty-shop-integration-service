@@ -16,6 +16,8 @@ public class ProductResponseDto {
     private String name;
     private String description;
     private BigDecimal price;
+    private Integer discount;
+    private String imageUrl;
     private Integer stockQuantity;
     private String stockKeepingUnit;
     private LocalDateTime createdAt;

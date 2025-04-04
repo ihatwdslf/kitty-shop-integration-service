@@ -1,5 +1,7 @@
 package kittyshop.integration.service.api.logic.product.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,6 +13,12 @@ public class ProductCreateRequestDto {
     private String name;
     private String description;
     private BigDecimal price;
+
+    @Min(0)
+    @Max(100)
+    private Integer discount;
+
+    private String imageUrl;
     private Integer stockQuantity;
     private String stockKeepingUnit;
     private LocalDateTime createdAt;
