@@ -42,6 +42,7 @@ public abstract class ControllerRoutes {
     public static final String PRODUCT_GET = "/api/v1/products/{id}";
     public static final String PRODUCT_DELETE = "/api/v1/products/{id}";
     public static final String PRODUCT_UPDATE = "/api/v1/products/{id}";
+    public static final String PRODUCT_TOTALS = "/api/v1/products/totals";
 
     // Order related Controllers
     public static final String ORDERS_GET = "/api/v1/orders";

@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -20,4 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @EntityGraph(attributePaths = {"categories", "brand"})
     Page<Product> findAll(Specification<Product> spec, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"categories", "brand"})
+    List<Product> findAllByIdIn(Set<Long> ids);
 }

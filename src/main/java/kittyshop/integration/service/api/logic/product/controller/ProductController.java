@@ -4,11 +4,8 @@ import jakarta.validation.Valid;
 import kittyshop.integration.service.api.config.ControllerRoutes;
 import kittyshop.integration.service.api.logic.common.controller.BaseController;
 import kittyshop.integration.service.api.logic.common.dto.Response;
-import kittyshop.integration.service.api.logic.product.dto.ProductCreateRequestDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductRequestDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductResponseDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductUpdateRequestDto;
-import kittyshop.integration.service.api.logic.product.mapper.ProductMapper;
+import kittyshop.integration.service.api.logic.order.dto.OrderItemCreateRequestDto;
+import kittyshop.integration.service.api.logic.product.dto.*;
 import kittyshop.integration.service.api.logic.product.service.ProductService;
 import kittyshop.integration.service.api.utils.PageableUtils;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +15,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @Log4j2
 @RestController
@@ -42,6 +41,46 @@ public class ProductController extends BaseController {
         log.info("Find product by id: {}", id);
         ProductResponseDto product = productService.findById(id);
         return this.response(product);
+    }
+
+    @GetMapping(ControllerRoutes.PRODUCT_TOTALS)
+    public ResponseEntity<Response> getProductById(
+            @RequestParam Map<String, String> params) {
+        Set<OrderItemCreateRequestDto> cartItems = new HashSet<>();
+
+        // Parsing the cartItems parameters from the URL
+        for (int i = 0; i < params.size() / 2; i++) {
+            Long productId = Long.valueOf(params.get("cartItems[" + i + "].productId"));
+            Integer quantity = Integer.valueOf(params.get("cartItems[" + i + "].quantity"));
+
+            // Add to cartItems list
+            cartItems.add(new OrderItemCreateRequestDto(productId, quantity));
+        }
+
+        // Construct your request DTO
+        ProductGetTotalsRequestDto requestDto = new ProductGetTotalsRequestDto();
+        requestDto.setCartItems(cartItems);
+
+        // Call your service method
+        ProductGetTotalsResponseDto product = productService.findTotals(requestDto);
+        return this.response(product);
+    }
+
+    private Set<OrderItemCreateRequestDto> parseCartItems(String[] cartItems) {
+        Set<OrderItemCreateRequestDto> cartItemsSet = new HashSet<>();
+
+        for (String item : cartItems) {
+            String[] parts = item.split(":");
+            if (parts.length == 2) {
+                Long productId = Long.valueOf(parts[0]);
+                Integer quantity = Integer.valueOf(parts[1]);
+
+                OrderItemCreateRequestDto dto = new OrderItemCreateRequestDto(productId, quantity);
+                cartItemsSet.add(dto);
+            }
+        }
+
+        return cartItemsSet;
     }
 
     @PostMapping(ControllerRoutes.PRODUCT_CREATE)

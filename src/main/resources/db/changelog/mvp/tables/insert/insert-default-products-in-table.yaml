@@ -1,0 +1,122 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-products
+      author: system
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Зволожуючий крем для обличчя"
+              - column:
+                  name: description
+                  value: "Багатий зволожуючий крем, який залишає шкіру м'якою та гладкою."
+              - column:
+                  name: price
+                  value: "29.99"
+              - column:
+                  name: discount
+                  value: "10"
+              - column:
+                  name: image_url
+                  value: "https://u.makeup.com.ua/k/kg/kggsuzrn1ygl.png"
+              - column:
+                  name: stock_quantity
+                  value: "100"
+              - column:
+                  name: sku
+                  value: "HFC001"
+              - column:
+                  name: brand_id
+                  value: "1"
+                  
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Живильний лосьйон для тіла"
+              - column:
+                  name: description
+                  value: "Легкий лосьйон, який живить і зволожує шкіру."
+              - column:
+                  name: price
+                  value: "19.99"
+              - column:
+                  name: discount
+                  value: "5"
+              - column:
+                  name: image_url
+                  value: "https://u.makeup.com.ua/j/j7/j7d3vffmhq0t.jpg"
+              - column:
+                  name: stock_quantity
+                  value: "150"
+              - column:
+                  name: sku
+                  value: "NBL002"
+              - column:
+                  name: brand_id
+                  value: "1"
+                  
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Омолоджуючий крем для очей"
+              - column:
+                  name: description
+                  value: "Крем для очей, який зменшує набряки та темні кола."
+              - column:
+                  name: price
+                  value: "34.99"
+              - column:
+                  name: discount
+                  value: "15"
+              - column:
+                  name: image_url
+                  value: "https://palitra.ua/image/cache/data/products/Koreya/7035f659574b1c12ef5b8ba5f1a63b8a-800x800.jpg"
+              - column:
+                  name: stock_quantity
+                  value: "80"
+              - column:
+                  name: sku
+                  value: "REC003"
+              - column:
+                  name: brand_id
+                  value: "1"
+              - column:
+                  name: created_at
+                  value: "2023-10-01 12:00:00"
+              - column:
+                  name: updated_at
+                  value: "2023-10-01 12:00:00"
+                  
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Заспокійливий гель алое вера"
+              - column:
+                  name: description
+                  value: "Гель алое вера, який заспокоює і зволожує шкіру."
+              - column:
+                  name: price
+                  value: "14.99"
+              - column:
+                  name: discount
+                  value: "0"
+              - column:
+                  name: image_url
+                  value: "https://u.makeup.com.ua/g/g0/g0p25o2eoa5l.jpg"
+              - column:
+                  name: stock_quantity
+                  value: "120"
+              - column:
+                  name: sku
+                  value: "SAVG004"
+              - column:
+                  name: brand_id
+                  value: "1"

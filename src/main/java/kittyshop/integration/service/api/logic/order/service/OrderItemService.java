@@ -2,9 +2,7 @@ package kittyshop.integration.service.api.logic.order.service;
 
 import kittyshop.integration.service.api.logic.common.dto.ListResponseDto;
 import kittyshop.integration.service.api.logic.common.service.SortableService;
-import kittyshop.integration.service.api.logic.order.dto.OrderItemCreateRequestDto;
-import kittyshop.integration.service.api.logic.order.dto.OrderItemResponseDto;
-import kittyshop.integration.service.api.logic.order.dto.OrderItemUpdateRequestDto;
+import kittyshop.integration.service.api.logic.order.dto.*;
 import org.springframework.data.domain.Pageable;
 
 public interface OrderItemService extends SortableService {

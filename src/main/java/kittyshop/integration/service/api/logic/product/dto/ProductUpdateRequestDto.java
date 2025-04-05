@@ -3,12 +3,14 @@ package kittyshop.integration.service.api.logic.product.dto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
+@Accessors(chain = true)
 public class ProductUpdateRequestDto {
     private String key;
     private String name;

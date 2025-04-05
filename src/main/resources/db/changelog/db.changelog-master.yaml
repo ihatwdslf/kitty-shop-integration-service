@@ -30,5 +30,10 @@ databaseChangeLog:
   - include:
       file: db/changelog/mvp/tables/insert/insert-default-statuses-in-table.yaml
   - include:
+      file: db/changelog/mvp/tables/insert/insert-default-brands-in-table.yaml
+  - include:
       file: db/changelog/mvp/tables/insert/insert-default-categories-in-table.yaml
-  
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-products-in-table.yaml
+  - include:
+      file: db/changelog/mvp/tables/insert/insert-default-products-categories-in-table.yaml

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-brands
+      author: system
+      changes:
+        - insert:
+            tableName: brands
+            columns:
+              - column:
+                  name: name
+                  value: "KittyBrand"
+              - column:
+                  name: description
+                  value: "Компанія, що спеціалізується на косметиці на моді"
+              - column:
+                  name: website
+                  value: "kitty-shop.com"
+              - column:
+                  name: country_id
+                  value: "1"

@@ -5,10 +5,8 @@ import jakarta.persistence.criteria.Join;
 import jakarta.validation.ValidationException;
 import kittyshop.integration.service.api.logic.category.entity.Category;
 import kittyshop.integration.service.api.logic.common.dto.ListResponseDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductCreateRequestDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductRequestDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductResponseDto;
-import kittyshop.integration.service.api.logic.product.dto.ProductUpdateRequestDto;
+import kittyshop.integration.service.api.logic.order.dto.OrderItemCreateRequestDto;
+import kittyshop.integration.service.api.logic.product.dto.*;
 import kittyshop.integration.service.api.logic.product.entity.Product;
 import kittyshop.integration.service.api.logic.product.mapper.ProductMapper;
 import kittyshop.integration.service.api.logic.product.repository.ProductRepository;
@@ -22,6 +20,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -86,6 +86,43 @@ public class ProductServiceImpl implements ProductService {
         productMapper.updateProduct(requestDto, product);
         productRepository.save(product);
         return productMapper.toProductResponseDto(product);
+    }
+
+    @Override
+    public ProductGetTotalsResponseDto findTotals(ProductGetTotalsRequestDto requestDto) {
+        double totalWithoutDiscount = 0;
+        double totalWithDiscount = 0;
+
+        Set<Long> productIds = requestDto.getCartItems().stream()
+                .map(OrderItemCreateRequestDto::getProductId)
+                .collect(Collectors.toSet());
+
+        List<Product> products = productRepository.findAllByIdIn(productIds);
+        log.info("Products found by product ids ({}) listed: {}", productIds, products);
+
+        for (Product product : products) {
+            double productPrice = product.getPrice().doubleValue();
+            double productDiscountMultiplier = 1.0 - ((double) product.getDiscount() / 100);
+            
+            OrderItemCreateRequestDto cartItem = requestDto.getCartItems().stream()
+                    .filter(ci -> ci.getProductId().equals(product.getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new EntityNotFoundException("Carr item not found for related product"));
+            
+            if (cartItem.getQuantity() < 0) {
+                throw new IllegalArgumentException("Quantity must be greater than zero");
+            }
+            
+            totalWithoutDiscount += productPrice * cartItem.getQuantity();
+            totalWithDiscount += (productPrice * productDiscountMultiplier) * cartItem.getQuantity();
+        }
+
+        double discountDifference = totalWithoutDiscount - totalWithDiscount;
+
+        return new ProductGetTotalsResponseDto()
+                .setTotalWithoutDiscount(totalWithoutDiscount)
+                .setTotalWithDiscount(totalWithDiscount)
+                .setDiscountDifference(discountDifference);
     }
 
     @Override
