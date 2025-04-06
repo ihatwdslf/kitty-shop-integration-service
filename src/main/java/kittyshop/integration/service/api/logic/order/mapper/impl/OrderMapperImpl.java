@@ -52,8 +52,8 @@ public class OrderMapperImpl implements OrderMapper {
                 .orElseThrow(() -> new EntityNotFoundException("Status does not found by name: " + statusName));
         order.setStatus(status);
 
-        PaymentMethod paymentMethod = paymentMethodRepository.findByName(createRequestDto.getPaymentMethod())
-                .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by name: " + createRequestDto.getPaymentMethod()));
+        PaymentMethod paymentMethod = paymentMethodRepository.findByKey(createRequestDto.getPaymentMethodKey())
+                .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by key: " + createRequestDto.getPaymentMethodKey()));
         order.setPaymentMethod(paymentMethod);
 
         return order;
@@ -78,8 +78,8 @@ public class OrderMapperImpl implements OrderMapper {
                 .orElseThrow(() -> new EntityNotFoundException("Status does not found by name: " + responseDto.getStatus().getName()));
         order.setStatus(status);
 
-        PaymentMethod paymentMethod = paymentMethodRepository.findByName(responseDto.getPaymentMethod().getName())
-                .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by name: " + responseDto.getPaymentMethod().getName()));
+        PaymentMethod paymentMethod = paymentMethodRepository.findByKey(responseDto.getPaymentMethod().getKey())
+                .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by key: " + responseDto.getPaymentMethod().getKey()));
         order.setPaymentMethod(paymentMethod);
 
         return order;
@@ -123,9 +123,9 @@ public class OrderMapperImpl implements OrderMapper {
         LocalDateTime updateOrderDate = LocalDateTime.now();
         order.setOrderDate(updateOrderDate);
 
-        if (updateRequestDto.getPaymentMethod() != null) {
-            PaymentMethod paymentMethod = paymentMethodRepository.findByName(updateRequestDto.getPaymentMethod())
-                    .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by name: " + updateRequestDto.getPaymentMethod()));
+        if (updateRequestDto.getPaymentMethodKey() != null) {
+            PaymentMethod paymentMethod = paymentMethodRepository.findByKey(updateRequestDto.getPaymentMethodKey())
+                    .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by key: " + updateRequestDto.getPaymentMethodKey()));
             order.setPaymentMethod(paymentMethod);
         }
 

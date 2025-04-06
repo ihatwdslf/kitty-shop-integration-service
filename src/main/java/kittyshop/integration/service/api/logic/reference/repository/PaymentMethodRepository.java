@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Long> {
 
-    Optional<PaymentMethod> findByName(String name);
+    Optional<PaymentMethod> findByKey(String key);
 }

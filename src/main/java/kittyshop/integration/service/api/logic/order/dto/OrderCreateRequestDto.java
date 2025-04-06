@@ -1,9 +1,14 @@
 package kittyshop.integration.service.api.logic.order.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
 public class OrderCreateRequestDto {
+    
+    @NotBlank
     private String shippingAddress;
-    private String paymentMethod;
+    
+    @NotBlank
+    private String paymentMethodKey;
 }

@@ -7,23 +7,68 @@ databaseChangeLog:
             tableName: payment_methods
             columns:
               - column:
+                  name: key
+                  value: "on_delivery_pay"
+              - column:
                   name: name
-                  value: "Credit Card"
+                  value: "Оплата при отриманні"
+
         - insert:
             tableName: payment_methods
             columns:
               - column:
+                  name: key
+                  value: "online_pay_credit_card"
+              - column:
                   name: name
-                  value: "PayPal"
+                  value: "Карткою онлайн"
+
         - insert:
             tableName: payment_methods
             columns:
               - column:
+                  name: key
+                  value: "online_pay_privat24"
+              - column:
                   name: name
-                  value: "Bank Transfer"
+                  value: "Privat 24"
+
         - insert:
             tableName: payment_methods
             columns:
               - column:
+                  name: key
+                  value: "online_pay_apple"
+              - column:
                   name: name
-                  value: "Cash on Delivery"
+                  value: "Apple Pay"
+
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: key
+                  value: "online_pay_google"
+              - column:
+                  name: name
+                  value: "Google Pay"
+
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: key
+                  value: "credit_funds_pay"
+              - column:
+                  name: name
+                  value: "Оплата частинами кредитними коштами"
+
+        - insert:
+            tableName: payment_methods
+            columns:
+              - column:
+                  name: key
+                  value: "company_pay"
+              - column:
+                  name: name
+                  value: "Рахунок підприємства"
