@@ -29,7 +29,12 @@ databaseChangeLog:
                   type: TIMESTAMP
               - column:
                   name: shipping_address
-                  type: VARCHAR(500)
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_option_key
+                  type: VARCHAR(64)
                   constraints:
                     nullable: false
               - column:

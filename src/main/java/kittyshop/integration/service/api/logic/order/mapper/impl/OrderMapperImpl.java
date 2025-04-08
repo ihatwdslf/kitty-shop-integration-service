@@ -40,6 +40,7 @@ public class OrderMapperImpl implements OrderMapper {
 
         Order order = new Order();
         order.setShippingAddress(createRequestDto.getShippingAddress());
+        order.setDeliveryOptionKey(createRequestDto.getDeliveryOptionKey());
         LocalDateTime orderDate = LocalDateTime.now();
         order.setOrderDate(orderDate);
 
@@ -47,9 +48,9 @@ public class OrderMapperImpl implements OrderMapper {
                 .orElseThrow(() -> new EntityNotFoundException("User does not found by id: " + authorizedUserEmail));
         order.setUser(user);
 
-        String statusName = Status.Defaults.PENDING.getName();
-        Status status = statusRepository.findByName(statusName)
-                .orElseThrow(() -> new EntityNotFoundException("Status does not found by name: " + statusName));
+        String statusKey = Status.Defaults.PENDING.getKey();
+        Status status = statusRepository.findByKey(statusKey)
+                .orElseThrow(() -> new EntityNotFoundException("Status does not found by key: " + statusKey));
         order.setStatus(status);
 
         PaymentMethod paymentMethod = paymentMethodRepository.findByKey(createRequestDto.getPaymentMethodKey())
@@ -68,14 +69,15 @@ public class OrderMapperImpl implements OrderMapper {
         Order order = new Order();
         order.setId(responseDto.getId());
         order.setShippingAddress(responseDto.getShippingAddress());
+        order.setDeliveryOptionKey(responseDto.getDeliveryOptionKey());
         order.setOrderDate(responseDto.getOrderDate());
 
         User user = userService.findByEmail(authorizedUserEmail)
                 .orElseThrow(() -> new EntityNotFoundException("User does not found by id: " + authorizedUserEmail));
         order.setUser(user);
 
-        Status status = statusRepository.findByName(responseDto.getStatus().getName())
-                .orElseThrow(() -> new EntityNotFoundException("Status does not found by name: " + responseDto.getStatus().getName()));
+        Status status = statusRepository.findByKey(responseDto.getStatus().getKey())
+                .orElseThrow(() -> new EntityNotFoundException("Status does not found by key: " + responseDto.getStatus().getKey()));
         order.setStatus(status);
 
         PaymentMethod paymentMethod = paymentMethodRepository.findByKey(responseDto.getPaymentMethod().getKey())
@@ -94,6 +96,7 @@ public class OrderMapperImpl implements OrderMapper {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
         orderResponseDto.setStatus(order.getStatus());
+        orderResponseDto.setDeliveryOptionKey(order.getDeliveryOptionKey());
         orderResponseDto.setPaymentMethod(order.getPaymentMethod());
         orderResponseDto.setUser(userMapper.toUserOnlyFetchResponseDto(order.getUser()));
         orderResponseDto.setOrderDate(order.getOrderDate());
@@ -123,15 +126,19 @@ public class OrderMapperImpl implements OrderMapper {
         LocalDateTime updateOrderDate = LocalDateTime.now();
         order.setOrderDate(updateOrderDate);
 
+        if (updateRequestDto.getDeliveryOptionKey() != null) {
+            order.setDeliveryOptionKey(updateRequestDto.getDeliveryOptionKey());
+        }
+
         if (updateRequestDto.getPaymentMethodKey() != null) {
             PaymentMethod paymentMethod = paymentMethodRepository.findByKey(updateRequestDto.getPaymentMethodKey())
                     .orElseThrow(() -> new EntityNotFoundException("PaymentMethod does not found by key: " + updateRequestDto.getPaymentMethodKey()));
             order.setPaymentMethod(paymentMethod);
         }
 
-        if (updateRequestDto.getStatus() != null) {
-            Status status = statusRepository.findByName(updateRequestDto.getStatus())
-                    .orElseThrow(() -> new EntityNotFoundException("Status does not found by name: " + updateRequestDto.getStatus()));
+        if (updateRequestDto.getStatusKey() != null) {
+            Status status = statusRepository.findByKey(updateRequestDto.getStatusKey())
+                    .orElseThrow(() -> new EntityNotFoundException("Status does not found by key: " + updateRequestDto.getStatusKey()));
             order.setStatus(status);
         }
 

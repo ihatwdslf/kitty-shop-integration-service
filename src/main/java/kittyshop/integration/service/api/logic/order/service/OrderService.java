@@ -11,7 +11,7 @@ public interface OrderService extends SortableService {
 
     OrderResponseDto create(String authorizedUserEmail, OrderCreateRequestDto createRequestDto);
 
-    ListResponseDto<OrderResponseDto> findAll(String authorizedUserEmail, Pageable pageable);
+    ListResponseDto<OrderResponseDto> findAll(String authorizedUserEmail, Pageable pageable, String status);
 
     OrderResponseDto findById(Long id);
 

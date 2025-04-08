@@ -29,12 +29,17 @@ public class OrderController extends BaseController {
 
     @GetMapping(ControllerRoutes.ORDERS_GET)
     public ResponseEntity<Response> getAllOrders(@PageableDefault Pageable pageable,
+                                                 @RequestParam(required = false) String status,
                                                  HttpServletRequest httpServletRequest) {
         String authorizedUserEmail = jwtUtil.getAuthorizedUserEmailFromJwt(httpServletRequest);
-        log.info("Find all orders by user email '{}' and pageable: {}", authorizedUserEmail, pageable.toString());
-        return this.response(orderService.findAll(authorizedUserEmail,
+        log.info("Find all orders by user email '{}' and pageable: {}, status: {}", 
+                authorizedUserEmail, pageable.toString(), status);
+        return this.response(orderService.findAll(
+                authorizedUserEmail,
                 PageableUtils.generatePageable(pageable.getPageNumber(),
-                        pageable.getPageSize(), orderService.getSortOrder())));
+                        pageable.getPageSize(), orderService.getSortOrder()), 
+                status
+        ));
     }
 
     @GetMapping(ControllerRoutes.ORDER_GET)

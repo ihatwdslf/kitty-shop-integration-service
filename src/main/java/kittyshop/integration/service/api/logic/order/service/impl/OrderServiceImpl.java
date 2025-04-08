@@ -9,6 +9,8 @@ import kittyshop.integration.service.api.logic.order.entity.Order;
 import kittyshop.integration.service.api.logic.order.mapper.OrderMapper;
 import kittyshop.integration.service.api.logic.order.repository.OrderRepository;
 import kittyshop.integration.service.api.logic.order.service.OrderService;
+import kittyshop.integration.service.api.logic.reference.entity.Status;
+import kittyshop.integration.service.api.logic.reference.repository.StatusRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper orderMapper;
     private final OrderRepository orderRepository;
+    private final StatusRepository statusRepository;
 
     @Override
     public OrderResponseDto create(String authorizedUserEmail, OrderCreateRequestDto createRequestDto) {
@@ -35,8 +38,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public ListResponseDto<OrderResponseDto> findAll(String authorizedUserEmail, Pageable pageable) {
-        Page<Order> orderPage = orderRepository.findAllByUserEmail(authorizedUserEmail, pageable);
+    public ListResponseDto<OrderResponseDto> findAll(String authorizedUserEmail, Pageable pageable, String statusKey) {
+        Page<Order> orderPage;
+        if (statusKey != null && !statusKey.isBlank()) {
+            Status status = statusRepository.findByKey(statusKey)
+                    .orElseThrow(() -> new EntityNotFoundException("Status not found by key '%s'".formatted(statusKey)));
+            orderPage = orderRepository.findAllByUserEmailAndStatus(authorizedUserEmail, status, pageable);
+        } else {
+            orderPage = orderRepository.findAllByUserEmail(authorizedUserEmail, pageable);
+        }
         return new ListResponseDto<OrderResponseDto>()
                 .setList(orderPage.stream()
                         .map(orderMapper::toOrderResponseDto)

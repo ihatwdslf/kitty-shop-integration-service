@@ -17,6 +17,7 @@ public class OrderResponseDto {
     private Status status;
     private LocalDateTime orderDate;
     private String shippingAddress;
+    private String deliveryOptionKey;
     private PaymentMethod paymentMethod;
     private Set<OrderItemResponseDto> orderItems;
 }

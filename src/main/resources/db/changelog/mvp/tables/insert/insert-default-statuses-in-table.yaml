@@ -7,29 +7,48 @@ databaseChangeLog:
             tableName: statuses
             columns:
               - column:
+                  name: key
+                  value: "pending"
+              - column:
                   name: name
-                  value: "Pending"
+                  value: "Перевіряємо"
+
         - insert:
             tableName: statuses
             columns:
               - column:
+                  name: key
+                  value: "processing"
+              - column:
                   name: name
-                  value: "Processing"
+                  value: "Обробляється"
+
         - insert:
             tableName: statuses
             columns:
               - column:
+                  name: key
+                  value: "shipped"
+              - column:
                   name: name
-                  value: "Shipped"
+                  value: "Відправлено"
+
         - insert:
             tableName: statuses
             columns:
               - column:
+                  name: key
+                  value: "delivered"
+              - column:
                   name: name
-                  value: "Delivered"
+                  value: "Доставлено"
+
         - insert:
             tableName: statuses
             columns:
               - column:
+                  name: key
+                  value: "cancelled"
+              - column:
                   name: name
-                  value: "Cancelled"
+                  value: "Скасовано"

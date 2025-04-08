@@ -15,7 +15,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: key
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: VARCHAR(64)
                   constraints:
                     nullable: false

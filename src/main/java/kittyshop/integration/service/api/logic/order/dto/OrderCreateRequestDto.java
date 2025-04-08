@@ -5,10 +5,13 @@ import lombok.Data;
 
 @Data
 public class OrderCreateRequestDto {
-    
+
     @NotBlank
     private String shippingAddress;
-    
+
     @NotBlank
     private String paymentMethodKey;
+
+    @NotBlank
+    private String deliveryOptionKey;
 }

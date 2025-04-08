@@ -36,8 +36,11 @@ public class Order {
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 
-    @Column(name = "shipping_address", length = 500, nullable = false)
+    @Column(name = "shipping_address", length = 255, nullable = false)
     private String shippingAddress;
+    
+    @Column(name = "delivery_option_key", length = 64)
+    private String deliveryOptionKey;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "payment_method_id", nullable = false)

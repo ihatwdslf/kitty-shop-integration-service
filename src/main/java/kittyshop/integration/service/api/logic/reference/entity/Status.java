@@ -21,6 +21,9 @@ public class Status {
     private Long id;
 
     @Column(nullable = false)
+    private String key;
+
+    @Column(nullable = false)
     private String name;
 
     @JsonIgnore
@@ -30,11 +33,11 @@ public class Status {
     @Getter
     @RequiredArgsConstructor
     public enum Defaults {
-        PENDING("PENDING", "Pending"),
-        PROCESSING("PROCESSING", "Processing"),
-        SHIPPED("SHIPPED", "Shipped"),
-        DELIVERED("DELIVERED", "Delivered"),
-        CANCELLED("CANCELLED", "Cancelled");
+        PENDING("pending", "Очікується"),
+        PROCESSING("processing", "Обробляється"),
+        SHIPPED("shipper", "Відправлено"),
+        DELIVERED("delivered", "Доставлено"),
+        CANCELLED("cancelled", "Скасовано");
 
         private final String key;
         private final String name;
